@@ -15,11 +15,11 @@
           @method('PUT')
           <div class="form-group">
             <label for="title">New task title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Please enter task title...">
+            <input type="text" class="form-control" id="title" value="{{$task->title}}" name="title" placeholder="Please enter task title...">
           </div>
           <div class="form-group">
             <label for="data">New task description</label>
-            <input type="text" class="form-control" id="data" name="data" placeholder="Please enter task description...">
+            <input type="text" class="form-control" id="data" name="data"  value="{{$task->decrypted_data}}"  placeholder="Please enter task description...">
           </div>
           <div class="form-group form-check">
             <input type="checkbox" class="checkbox" id="completed" name="completed">
