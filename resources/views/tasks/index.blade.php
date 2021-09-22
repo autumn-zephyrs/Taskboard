@@ -21,6 +21,7 @@
               <th>Task Content</th>
               <th>Comlpeted?</th>
               <th>Date Created</th>
+              <th>Mark Completed</th>
               <th>View</th>
               <th>Edit</th>
               <th>Delete</th>
@@ -31,13 +32,20 @@
               <tr>
                 <td> {{$task->id}} </td>
                 <td> {{$task->title}} </td>
-                <td> {{$task->data}} </td>
+                <td> {{$task->decrypted_data}} </td>
                 @if ($task->completed)
                   <td> Yes </td>
                 @else
                   <td> No </td>
                 @endif
                 <td> {{$task->created_at}} </td>
+                <td>
+                  {{ Form::open(array('action' => 'TaskController@update')) }}
+                  {{ Form::hidden('_method', 'PUT') }}
+                  {{ Form::hidden('complete', 'on') }}
+                  {{ Form::submit('Complete', array('class' => 'btn btn-small btn-warning')) }}
+                  {{ Form::close() }}
+                </td>
                 <td> <a class="btn btn-small btn-success" href="{{ URL::to('tasks/' . $task->id) }}">View</a></td>
                 <td> <a class="btn btn-small btn-info" href="{{ URL::to('tasks/' . $task->id . '/edit') }}">Edit</a> </td>
                 <td>

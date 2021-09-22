@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class Task extends Model
 {
@@ -20,4 +21,9 @@ class Task extends Model
         'data',
         'completed',
     ];
+
+    public function getDecryptedDataAttribute()
+    {
+        return Crypt::decryptString($this->attributes['data']);
+    }
 }

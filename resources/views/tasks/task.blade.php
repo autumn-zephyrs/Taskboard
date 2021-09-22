@@ -15,7 +15,7 @@
       </div>
       <div>
           <h3> Task Description</h3>
-          <p> {{$task->data}} </p>
+          <p> {{$task->decrypted_data}} </p>
       </div>
       <div>
           <h3> Is the task completed?</h3>

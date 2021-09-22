@@ -8,9 +8,12 @@ use App\Models\Task;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Crypt;
 
 class TaskController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -55,9 +58,10 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $data = Crypt::encryptString($request->data);
         Task::insert([
             'title' => $request->title,
-            'data' => $request->data,
+            'data' => $data,
             'user' => Auth::id(), 
             'completed' => 0,
             'created_at' => now(),
@@ -109,12 +113,14 @@ class TaskController extends Controller
             $completed = 1;
         }
 
+        $data = Crypt::encryptString($request->data);
+
         $userId = Auth::id(); 
         Task::where('user', '=', $userId)
             ->where('id', '=' , $id)
             ->update([
                 'title' => $request->title,
-                'data' => $request->data,
+                'data' => $data,
                 'user' => Auth::id(), 
                 'completed' => $completed,
                 'updated_at' => now()
